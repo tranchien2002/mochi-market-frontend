@@ -19,6 +19,7 @@ import ConnectWallet from 'Components/ConnectWallet';
 import Share from 'Components/Share';
 import BackButton from 'Components/BackButton';
 import { getSymbol } from 'utils/getContractAddress';
+import { auditAddress, getAllOwnersOf1155 } from 'utils/helper';
 import avatarDefault from 'Assets/avatar-profile.png';
 
 import './style.css';
@@ -231,6 +232,7 @@ export default function DetailNFT() {
                     <TabPane tab='Owners' key='1'>
                       <Link to={`/profile/${owner}`} className='owner'>
                         <img src={avatarDefault} alt='avatar-default' /> {'  '}
+                        {auditAddress(owner)}
                         <strong>{owner}</strong>
                       </Link>
                     </TabPane>

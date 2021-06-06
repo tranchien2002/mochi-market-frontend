@@ -13,6 +13,7 @@ import avatarDefault from 'Assets/avatar-profile.png';
 import { getNFTsOfOwner, setAvailableSellOrder } from 'store/actions';
 import './index.css';
 import { useParams } from 'react-router';
+import { auditAddress } from 'utils/helper';
 
 const { TabPane } = Tabs;
 
@@ -65,6 +66,7 @@ export default function Profile() {
                         address.length - 8,
                         address.length
                       )}`}{' '}
+                      {auditAddress(address)}
                       {isCopied ? (
                         <svg
                           viewBox='0 0 14 11'

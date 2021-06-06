@@ -1,4 +1,5 @@
 import { getContractAddress } from 'utils/getContractAddress';
+import tick from 'Assets/icons/tick.png';
 const Web3 = require('web3');
 const ERC20 = require('Contracts/ERC20.json');
 const axios = require('axios');
@@ -216,4 +217,13 @@ export async function listTokensERC115OfOwner(listAddressAccept, walletAddress) 
   );
 
   return list1155;
+}
+
+export function auditAddress(address) {
+  const checkedList = ['0x77d89332f7f4fc8d8fbc231c9292e970e8321637'];
+  if (checkedList.includes(address.toLowerCase())) {
+    return <img style={{ height: '1.5rem', width: '1.5rem' }} src={tick} alt={address}></img>;
+  } else {
+    return null;
+  }
 }

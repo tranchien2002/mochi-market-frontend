@@ -476,7 +476,6 @@ export const setAvailableSellOrder = (walletAddress) => async (dispatch, getStat
       let availableSellOrderERC721 = await sellOrderList.methods
         .getSellOrdersByIdList(availableSellOrderIdList.resultERC721)
         .call();
-      console.log(availableSellOrderERC721);
 
       let availableSellOrderERC1155 = await sellOrderList.methods
         .getSellOrdersByIdList(availableSellOrderIdList.resultERC1155)
@@ -509,29 +508,37 @@ export const setAvailableSellOrder = (walletAddress) => async (dispatch, getStat
       );
 
       var convertErc1155Tokens = [];
-      var listNftContracts1155 = [];
-      if (!!availableSellOrderERC1155 && availableSellOrderERC1155.length > 0) {
-        availableSellOrderERC721.map(async (sellOrder, i) => {
-          let token = { tokenId: [], price: [], tokenPayment: [], seller: [], amount: [] };
-          if (!!sellOrder.isActive) {
-            //cant fine nft in list
-            token.nftAddress = sellOrder.nftAddress;
-            token.instance = new web3.eth.Contract(ERC1155.abi, sellOrder.nftAddress);
-            token.tokenId.push({ sortIndex: i, id: sellOrder.tokenId });
-            token.price.push(sellOrder.price);
-            token.tokenPayment.push(sellOrder.token);
-            token.seller.push(sellOrder.seller);
-            token.amount.push(sellOrder.amount);
-            listNftContracts1155.push(token);
-          }
-        });
-      }
+      // var listNftContracts1155 = [];
+      // if (!!availableSellOrderERC1155 && availableSellOrderERC1155.length > 0) {
+      //   availableSellOrderERC721.map(async (sellOrder, i) => {
+      //     let token = {
+      //       sellId: [],
+      //       tokenId: [],
+      //       price: [],
+      //       tokenPayment: [],
+      //       seller: [],
+      //       amount: [],
+      //     };
+      //     if (!!sellOrder.isActive) {
+      //       //cant fine nft in list
+      //       token.nftAddress = sellOrder.nftAddress;
+      //       token.instance = new web3.eth.Contract(ERC1155.abi, sellOrder.nftAddress);
+      //       token.sellId.push(sellOrder.sellId);
+      //       token.tokenId.push({ sortIndex: i, id: sellOrder.tokenId });
+      //       token.price.push(sellOrder.price);
+      //       token.tokenPayment.push(sellOrder.token);
+      //       token.seller.push(sellOrder.seller);
+      //       token.amount.push(sellOrder.amount);
+      //       listNftContracts1155.push(token);
+      //     }
+      //   });
+      // }
 
-      convertErc1155Tokens = await Promise.all(
-        listNftContracts1155.map(async (listNftcontract) => {
-          return await pushErc1155(listNftcontract);
-        })
-      );
+      // convertErc1155Tokens = await Promise.all(
+      //   listNftContracts1155.map(async (listNftcontract) => {
+      //     return await pushErc1155(listNftcontract);
+      //   })
+      // );
 
       dispatch({
         type: SET_LIST_NTTS_ONSALE,

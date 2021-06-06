@@ -35,12 +35,12 @@ export default function Home() {
 
       {/* Suggest */}
       <div className='center'>
-        <p style={{ color: '#A3A3A3' }}>Suggested:</p>
+        {/* <p style={{ color: '#A3A3A3' }}>Suggested:</p>
         {tags.map((tag, index) => (
           <div key={index} style={{ margin: '0px 10px', cursor: 'pointer' }}>
             <p className='pink-font'>{tag}</p>
           </div>
-        ))}
+        ))} */}
       </div>
 
       {isLoadingErc721 || isLoadingErc721 === null ? (
